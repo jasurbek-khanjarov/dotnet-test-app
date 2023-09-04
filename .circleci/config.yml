@@ -45,12 +45,18 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
+  runner-test:
+    machine: true
+    resource_class: jkscci/windows-runner
+    steps:
+      - run: echo "Hi I'm on Runners!"
 workflows:
   build-and-test:
     jobs:
-      - test-2
-      - test
-      - build:
-          requires:
-            - test
+      # - test-2
+      # - test
+      # - build:
+      #     requires:
+      #       - test
+      - runner-test
       
