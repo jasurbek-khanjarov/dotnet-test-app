@@ -4,9 +4,21 @@ orbs:
   windows: circleci/windows@2.2.0
 
 jobs:
-  test:
+  test-2:
     executor:
       name: windows/default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dotnet-packages-v1-{{ checksum "SimpleCalc/SimpleCalc.csproj" }}
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - run: dotnet.exe test -v n
+  test:
+    machine: true
+    resource_class: jkscci/windows-runner
     steps:
       - checkout
       - restore_cache:
@@ -33,10 +45,18 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
+  runner-test:
+    machine: true
+    resource_class: jkscci/windows-runner
+    steps:
+      - run: echo "Hi I'm on Runners!"
 workflows:
   build-and-test:
     jobs:
+      # - test-2
       - test
-      - build:
-          requires:
-            - test
+      # - build:
+      #     requires:
+      #       - test
+      - runner-test
+      
