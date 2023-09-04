@@ -18,7 +18,7 @@ jobs:
       - run: dotnet.exe test -v n
   test:
     executor:
-      name: windows/default
+      name: jkscci/windows-runner
     steps:
       - checkout
       - restore_cache:
@@ -53,8 +53,8 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      # - test-2
-      # - test
+      - test-2
+      - test
       # - build:
       #     requires:
       #       - test
