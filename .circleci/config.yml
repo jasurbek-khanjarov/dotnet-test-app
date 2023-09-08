@@ -49,7 +49,7 @@ jobs:
     resource_class: 'jkscci/windows-runner'
     machine: 
       image: 'jkscci/windows-runner'
-      shell: 'powershell.exe -ExecutionPolicy Bypass'
+      shell: 'powershell.exe'
     steps:
       - run: Write-Host 'Hello, Windows'
       - run: echo "Hi I'm on Runners!"
