@@ -46,8 +46,10 @@ jobs:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
   runner-test:
-    machine: true
-    resource_class: jkscci/windows-runner
+    resource_class: 'jkscci/windows-runner'
+    machine: 
+      image: 'jkscci/windows-runner'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       - run: echo "Hi I'm on Runners!"
 workflows:
