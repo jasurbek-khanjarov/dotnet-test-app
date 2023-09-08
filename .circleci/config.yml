@@ -53,11 +53,12 @@ jobs:
     steps:
       - run: Write-Host 'Hello, Windows'
       - run: echo "Hi I'm on Runners!"
+      - run: msbuild -version
 workflows:
   build-and-test:
     jobs:
       # - test-2
-      - test
+      # - test
       # - build:
       #     requires:
       #       - test
