@@ -51,6 +51,7 @@ jobs:
       image: 'jkscci/windows-runner'
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
+      - run: Write-Host 'Hello, Windows'
       - run: echo "Hi I'm on Runners!"
 workflows:
   build-and-test:
