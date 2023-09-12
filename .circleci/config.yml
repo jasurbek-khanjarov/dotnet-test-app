@@ -53,6 +53,11 @@ jobs:
     steps:
       - run: Write-Host 'Hello, Windows'
       - run: $env:PATH
+      - run:
+          name: Get circleci User PATH
+          command: |
+            Get-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Environment\' -Name PATH
+
       # - run: echo "Hi I'm on Runners!"
       # - run: msbuild -version
 workflows:
