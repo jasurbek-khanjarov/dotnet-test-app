@@ -49,11 +49,12 @@ jobs:
     resource_class: 'jkscci/windows-runner'
     machine: 
       image: 'jkscci/windows-runner'
-      shell: 'powershell.exe'
+      shell: powershell.exe
     steps:
       - run: Write-Host 'Hello, Windows'
-      - run: echo "Hi I'm on Runners!"
-      - run: msbuild -version
+      - run: $env:PATH
+      # - run: echo "Hi I'm on Runners!"
+      # - run: msbuild -version
 workflows:
   build-and-test:
     jobs:
