@@ -60,12 +60,26 @@ jobs:
       # - run:
       #     name: Update PATH of circleci user
       #     command: |
-      #       [Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\Windows\Microsoft.NET\Framework64\v4.0.30319\", "User")
-      # - run:
-      #     name: Get circleci User PATH after update
-      #     command: |
-      #       Get-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Environment\' -Name PATH
-      # - run: msbuild -version
+      #       $existingPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+      #       $newPath = "$existingPath;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\"
+      #       [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
+      - run:
+          name: "Update PATH of circleci user"
+          command: |
+            $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+            # Check if the string already exists in the user-specific PATH
+            if ($userPath.Contains("C:\Windows\Microsoft.NET\Framework64\v4.0.30319\")) {
+                Write-Host "The specified string already exists in the user's PATH variable."
+            }
+            else {
+                $newPath = "$userPath;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\"
+                [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
+                Write-Host "The specified string has been added to the user's PATH variable."
+            }
+      - run:
+          name: Get circleci User PATH after UPDATE
+          command: |
+            Get-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Environment\' -Name PATH
 workflows:
   build-and-test:
     jobs:
