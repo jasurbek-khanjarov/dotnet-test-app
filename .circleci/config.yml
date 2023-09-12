@@ -62,7 +62,7 @@ jobs:
           command: |
             $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
             # Check if the string already exists in the user-specific PATH
-            if ($userPath.Contains("C:\Windows\Microsoft.NET\Framework64\v4.0.xxx\")) {
+            if ($userPath.Contains("C:\Windows\Microsoft.NET\Framework64\v4.0.30319\")) {
                 Write-Host "The specified string already exists in the user's PATH variable."
             }
             else {
